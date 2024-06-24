@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convite Especial</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        
+        body {
+            background-color: #bce7f1;
+            margin: 0;
+            padding: 0;
+        }
+        #invitation {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+        .typewriter {
+            display: inline-block;
+            overflow: hidden;
+            border-right: .15em solid orange;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: blink-caret .75s step-end infinite;
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: orange; }
+        }
+        #button-container {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #3522e9;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0c00b9;
+        }
+        p {
+            
+            font-size: 4vw; /* Tamanho de fonte responsivo */
+            margin: 10px 0;
+            max-width: 90%; /* Largura máxima para evitar que a mensagem fique muito larga */
+            line-height: 2; /* Espaçamento entre linhas */
+            text-shadow: 0 0 5px #b3d9ff, 0 0 10px #99c2ff, 0 0 15px #80abff, 0 0 20px #668eff, 0 0 25px #4d77ff, 0 0 30px #335fff, 0 0 35px #1a48ff;
+        }
+
+        @media (min-width: 768px) {
+            p {
+                font-size: 2.5vw; /* Reduz o tamanho da fonte para telas maiores */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="invitation">
+        <div class="typewriter" id="typewriter"></div>
+        <div id="button-container" style="display: none;">
+            <button onclick="redirectToEnvelope()">CLARO QUE SIM!</button>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            const nome = params.get('nome');
+            const mensagem = [
+                "Henry veio entregar a CARTA",
+                "e adivinha qual o selo dela??",
+                "Isso mesmo SELO EJC...",
+                `Sua carta chegou ${nome},`,
+                "está preparado para essa aventura?"
+            ];
+            typeMessage(mensagem, 0);
+        };
+
+        function typeMessage(lines, index) {
+            if (index < lines.length) {
+                let line = lines[index];
+                let typewriter = document.getElementById('typewriter');
+                typeLine(line, 0, () => {
+                    typewriter.innerHTML += "<br>";
+                    typeMessage(lines, index + 1);
+                });
+            } else {
+                document.getElementById('button-container').style.display = 'block';
+            }
+        }
+
+        function typeLine(line, index, callback) {
+            if (index < line.length) {
+                document.getElementById('typewriter').innerHTML += line.charAt(index);
+                setTimeout(() => {
+                    typeLine(line, index + 1, callback);
+                }, 100);
+            } else {
+                setTimeout(callback, 500); // Pausa antes de começar a digitar a próxima linha
+            }
+        }
+
+        function redirectToEnvelope() {
+            window.location.href = 'animatedEnvelope.html';
+        }
+    </script>
+</body>
+</html>

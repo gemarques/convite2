@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envelope Animado</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="wrapper" id="envelope-wrapper" onclick="openEnvelope()">
+        <div class="lid one"></div>
+        <div class="lid two"></div>
+        <div class="envelope"></div>
+        <div class="letter">
+            <p>Abrir</p>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // Iniciar a animação do envelope automaticamente
+            const wrapper = document.getElementById('envelope-wrapper');
+            wrapper.classList.add('animate');
+        };
+
+        function openEnvelope() {
+            window.location.href = 'https://wa.me/5534997211859?text=Oi%2C%20recebi%20minha%20carta.%20Como%20fa%C3%A7o%20para%20poder%20ler%20o%20conte%C3%BAdo%3F';;
+        }
+
+    </script>
+</body>
+</html>
